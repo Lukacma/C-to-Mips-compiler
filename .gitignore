@@ -1,0 +1,6 @@
+.vscode/*
+.ionide/*
+tmp/*
+ubuntu-xenial-16.04-cloudimg-console.log
+test_program
+.vagrant/*

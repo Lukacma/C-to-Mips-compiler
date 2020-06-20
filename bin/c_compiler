@@ -1,0 +1,29 @@
+
+#!/bin/bash
+
+
+TEMP=`getopt -o S:o: -l translate: -- "$@"`
+eval set -- "$TEMP"
+SOURCE=""
+DEST=""
+TRANSLATE=false
+
+while true ; do
+    case "$1" in
+        -S)
+            SOURCE=$2 ; shift 2 ;;
+        -o)
+            DEST=$2 ; shift 2;;
+        --translate)
+           SOURCE=$2 ; TRANSLATE=true ; shift 2;;
+        --) break ;;
+        *) echo "Internal error!" ; exit 1 ;;
+    esac
+done
+
+if [[ "$TRANSLATE" = true ]]; then
+    cat "$SOURCE" | bin/translator 1>"$DEST" 
+else
+    # echo "OutFiale: $DEST"
+    cat $SOURCE | bin/compiler 1> $DEST
+fi
